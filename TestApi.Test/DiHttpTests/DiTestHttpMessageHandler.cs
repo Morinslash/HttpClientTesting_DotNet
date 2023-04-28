@@ -1,4 +1,4 @@
-﻿namespace TestApi.Test;
+﻿namespace TestApi.Test.DiHttpTests;
 
 public class DiTestHttpMessageHandler : HttpMessageHandler
 {

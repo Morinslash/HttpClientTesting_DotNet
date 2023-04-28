@@ -5,6 +5,13 @@ namespace TestApi.Test;
 
 public class TestStartup
 {
+    private readonly string _baseAddress;
+
+    public TestStartup(string baseAddress)
+    {
+        _baseAddress = baseAddress;
+    }
+
     public IServiceCollection ConfigureServices()
     {
         var services = new ServiceCollection();
@@ -12,7 +19,7 @@ public class TestStartup
         services.AddHttpClient("WeatherAPI",
             configureClient =>
             {
-                configureClient.BaseAddress = new Uri("https://localhost:7140");
+                configureClient.BaseAddress = new Uri(_baseAddress);
             });
 
         services.AddTransient<WeatherReader>();

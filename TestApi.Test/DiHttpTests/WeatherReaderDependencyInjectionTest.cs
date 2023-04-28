@@ -2,10 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using TestAPI;
 
-namespace TestApi.Test;
+namespace TestApi.Test.DiHttpTests;
 
 public class WeatherReaderDependencyInjectionTest : TestBase
 {
+    public WeatherReaderDependencyInjectionTest() : base("https://localhost:7140")
+    {
+    }
+
     [Fact]
     public async Task GetForecast_200()
     {
@@ -29,7 +33,7 @@ public class WeatherReaderDependencyInjectionTest : TestBase
         // Assert
         Assert.Equal(expectedData, result);
     }
-    
+
     [Fact]
     public async Task GetForecast_404()
     {

@@ -1,11 +1,11 @@
-﻿namespace TestApi.Test;
+﻿namespace TestApi.Test.DiHttpTests;
 
-public class TestHttpClientFactory : IHttpClientFactory
+public class DiTestHttpClientFactory : IHttpClientFactory
 {
     private readonly HttpMessageHandler _messageHandler;
     private readonly string _baseAddress;
 
-    public TestHttpClientFactory(HttpMessageHandler messageHandler, string baseAddress)
+    public DiTestHttpClientFactory(HttpMessageHandler messageHandler, string baseAddress)
     {
         _messageHandler = messageHandler;
         _baseAddress = baseAddress;

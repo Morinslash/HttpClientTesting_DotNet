@@ -25,7 +25,10 @@ public class WeatherReaderTests
         
         var httpClientFactoryMock = new Mock<IHttpClientFactory>();
         httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>()))
-            .Returns(new HttpClient(messageHandlerMock.Object));
+            .Returns(new HttpClient(messageHandlerMock.Object)
+            {
+                BaseAddress = new Uri("https://localhost:7140")
+            });
 
         var weatherReader = new WeatherReader(httpClientFactoryMock.Object);
 
@@ -43,9 +46,9 @@ public class WeatherReaderTests
             StatusCode = HttpStatusCode.OK,
             Content = new StringContent(expectedData)
         };
-
+    
         var testMessageHandler = new TestHttpMessageHandler(response);
-        var testHttpClientFactory = new TestHttpClientFactory(testMessageHandler);
+        var testHttpClientFactory = new TestHttpClientFactory(testMessageHandler, "https://localhost:7140");
         var myApiService = new WeatherReader(testHttpClientFactory);
         
         var result = await myApiService.GetForecastAsync();
